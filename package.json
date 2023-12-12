@@ -1,0 +1,26 @@
+{
+  "name": "goldilocks",
+  "version": "1.0.0",
+  "description": "A Web Crawler in Javascript",
+  "main": "crawler.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha ./tests/*test.js",
+    "start-crawler": "nodemon ./index.js"
+  },
+  "author": "Darius Daniel",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "chai": "^4.3.10",
+    "cheerio": "^1.0.0-rc.12",
+    "mocha": "^10.2.0",
+    "mongodb": "^6.3.0",
+    "nodemon": "^3.0.2",
+    "nvm": "^0.0.4",
+    "sinon": "^17.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0"
+  }
+}
