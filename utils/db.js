@@ -21,6 +21,25 @@ class DBClient {
   async connect() {
     await this.client.connect();
   }
+
+  async insertOne(collection, item) {
+    const insertInfo = await this.db.collection(collection).insertOne(item);
+
+    return insertInfo;
+  }
+
+  async insertMany(collection, arrayOfItems) {
+    const insertInfo = await this.db.collection(collection).insertMany(arrayOfItems);
+
+    return insertInfo;
+  }
+
+  async crawled(url) {
+    if (await this.db.collection('visited').findOne({ url })) {
+      return true;
+    }
+    return false;
+  }
 }
 
 const dbClient = new DBClient();
