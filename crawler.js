@@ -4,35 +4,78 @@ import Queue from './utils/queue.js';
 import axios from 'axios';
 
 class Crawler {
-  fetchHTML(url) {
-    // Use a axios to make an HTTP request to the given URL and retrieve the HTML content
-    // Return the HTML content
-  }
+  parseURL(url, baseURL) {
+    if (baseURL.endsWith('/')) {
+      baseURL = baseURL.slice(0, -1);
+    }
+    if (url) {
+      if (url.startsWith('/')) {
+        url = `${baseURL}${url}`;
+      } else if (url.startsWith('#')) {
+        url = `${baseURL}/${url}`;
+      } else if (
+        url.startsWith('http://') === false &&
+        url.startsWith('https://') === false
+      ) {
+        url = `http://${url}`;
+      } 
+    }
 
-  extractLinks(htmlContent) {
-    // Use a cheerios to extract links from the HTML content
-    // Return a list of links
+   try {
+      return new URL(url).href;
+    } catch (error) {
+      return error;
+    }
   }
 
   processData(data, url) {
     // Process the extracted data (e.g., store in a database, print to console, etc.)
   }
 
-  webCrawler(seedURL, maxDepth) {
-    // Initialize a queue to store URLs to be crawled
-    // Enqueue the seed URL with depth 0
-
-    // Loop until the queue is empty of the maximum depth is reached
-    // Inside loop:
-    //    Dequeue a URL and its depth
-    //    Fetch the HTML contents of the current URL
-    //    Parse the HTML contents to extract relevant data (links, both internal and external)
-    //    Process the extracted data (store in a database)
-    //    If the current depth is less than the maximum depth, enqueue links found (ensure the link has not been
-    //    visited before to avoid crawling the same page multiple times).
-  }
-
+  async webCrawler(seedURL, maxDepth) {
+    const queue = new Queue();
+    const visited = new Set();
   
+    
+    seedURL = this.parseURL(seedURL, seedURL);
+    if (seedURL instanceof Error === false) {
+      queue.enqueue([seedURL, 0]);
+    }
+    
+    while (queue.size() > 0) {
+      let [url, depth] = queue.dequeue();
+      if (url instanceof Error === false) {
+        try {
+          const response = await axios.get(url);
+  
+          const $ = cheerio.load(response.data);
+          const $a = $('body a');
+
+          await dbClient.insertOne('visited', { url, 'label': $('title').text() });
+          visited.add(url);
+
+          if (depth <= maxDepth) {
+            $a.each((i, element) => {
+              const link = $(element).attr('href');
+              const parsedLink = this.parseURL(link, url);
+              const alreadyCrawled = visited.has(url);
+
+              if ((parsedLink instanceof Error && alreadyCrawled) === false) {
+                const linkObj = new URL(parsedLink);
+                if (`http://${linkObj.host}` === url) {
+                  queue.enqueue([parsedLink, depth + 1]);
+                } else {
+                  queue.enqueue([parsedLink, 0]);
+                }
+              }
+            });
+          }
+        } catch(error) {
+          console.error(`Error: ${error.message}`);
+        }
+      }
+    }
+  }
 }
 
 export default Crawler;
