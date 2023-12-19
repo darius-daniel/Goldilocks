@@ -5,14 +5,19 @@ import axios from 'axios';
 
 class Crawler {
   parseURL(url, baseURL) {
+    if (baseURL === undefined) {
+      baseURL = url;
+    }
+
     if (baseURL.endsWith('/')) {
       baseURL = baseURL.slice(0, -1);
     }
+
     if (url) {
       if (url.startsWith('/')) {
-        url = `${baseURL}${url}`;
+        url = `http://${baseURL}${url}`;
       } else if (url.startsWith('#')) {
-        url = `${baseURL}/${url}`;
+        url = `http://${baseURL}/${url}`;
       } else if (
         url.startsWith('http://') === false &&
         url.startsWith('https://') === false
@@ -55,14 +60,13 @@ class Crawler {
           visited.add(url);
 
           if (depth <= maxDepth) {
-            $a.each((i, element) => {
+            $a.each(async (i, element) => {
               const link = $(element).attr('href');
               const parsedLink = this.parseURL(link, url);
-              const alreadyCrawled = visited.has(url);
 
-              if ((parsedLink instanceof Error && alreadyCrawled) === false) {
+              if (!visited.has(parsedLink) && !(parsedLink instanceof Error)) {
                 const linkObj = new URL(parsedLink);
-                if (`http://${linkObj.host}` === url) {
+                if (linkObj.hostname.endsWith(url)) {
                   queue.enqueue([parsedLink, depth + 1]);
                 } else {
                   queue.enqueue([parsedLink, 0]);

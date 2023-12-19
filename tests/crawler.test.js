@@ -4,17 +4,24 @@ import Sinon from 'sinon';
 
 describe('Crawler', () => {
   before(function () {
-    const stub = Sinon.stub(Crawler);
-  })
-
-  it('create new:', function () {
-    expect(new Crawler()).to.throw(Error);
+    const crawlerStub = Sinon.stub(Crawler);
   });
 
-  it('normalizeURL', function () {
-    const bot = new Crawler('www.facebook.com');
 
-    expect(bot.normalizeURL()).to.be.a('string');
-    expect(bot.normalizeURL()).to.equal('http://www.facebook.com');
-  })
-})
+  it('parseURL (absolute urls)', function () {
+    const bot = new Crawler();
+    const url = 'www.facebook.com';
+
+    expect(bot.parseURL(url)).to.be.a('string');
+    expect(bot.parseURL(url)).to.equal(`http://${url}/`);
+  });
+
+  it('parseURL (relative urls)', function () {
+    const bot = new Crawler();
+    const url = 'www.facebook.com';
+    const path = '/login'
+
+    expect(bot.parseURL(path, url)).to.be.a('string');
+    expect(bot.parseURL(path, url)).to.equal(`http://${url}${path}`);
+  });
+});
