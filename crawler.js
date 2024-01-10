@@ -4,8 +4,18 @@ import Queue from './utils/queue.js';
 import axios from 'axios';
 
 class Crawler {
+  isRelativeURL(url) {
+    return url.startsWith('/') || url.startsWith('#');
+  }
+
   parseURL(url, baseURL) {
-    if (baseURL === undefined) {
+    if (url === undefined) {
+      return new Error(`url is undefined`);
+    }
+
+    if (!baseURL && this.isRelativeURL(url) === true) {
+      return new Error(`baseURL is undefined and ${url} is not an absolute url`);
+    } else if (!baseURL && this.isRelativeURL(url) === false) {
       baseURL = url;
     }
 
@@ -13,18 +23,20 @@ class Crawler {
       baseURL = baseURL.slice(0, -1);
     }
 
-    if (url) {
-      if (url.startsWith('/')) {
-        url = `http://${baseURL}${url}`;
-      } else if (url.startsWith('#')) {
-        url = `http://${baseURL}/${url}`;
-      } else if (
-        url.startsWith('http://') === false &&
-        url.startsWith('https://') === false
-      ) {
-        url = `http://${url}`;
-      } 
-    }
+    if (url.startsWith('/')) {
+      url = `http://${baseURL}${url}`;
+    } else if (url.startsWith('#')) {
+      if (baseURL.endsWith('/')) {
+        baseURL = baseURL.slice(0, -1);
+      }
+
+      url = `http://${baseURL}/${url}`;
+    } else if (
+      url.startsWith('http://') === false &&
+      url.startsWith('https://') === false
+    ) {
+      url = `http://${url}`;
+    } 
 
    try {
       return new URL(url).href;

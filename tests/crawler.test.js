@@ -23,5 +23,14 @@ describe('Crawler', () => {
 
     expect(bot.parseURL(path, url)).to.be.a('string');
     expect(bot.parseURL(path, url)).to.equal(`http://${url}${path}`);
+    expect(bot.parseURL(path) instanceof Error).to.be.true;
   });
+
+  it('webCrawler', function () {
+    const bot = new Crawler();
+    const url = 'www.facebook.com';
+    const path = '/login';
+
+    
+  })
 });
