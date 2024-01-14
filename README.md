@@ -5,6 +5,7 @@ Goldilocks is a terminal-based bot written in JavaScript to crawl webpages and p
 * `JavaScript`
 * `Node.js`
 * `Axios`
+* `Cheerio`
 * `MongoDB driver for Node.js`
 * `MongoDB server`
 
