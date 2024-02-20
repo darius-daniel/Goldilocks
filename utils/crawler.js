@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
-import dbClient from './utils/db.js';
-import Queue from './utils/queue.js';
+import dbClient from './db.js';
+import Queue from './queue.js';
 import axios from 'axios';
 
 class Crawler {
@@ -14,7 +14,9 @@ class Crawler {
     }
 
     if (!baseURL && this.isRelativeURL(url) === true) {
-      return new Error(`baseURL is undefined and ${url} is not an absolute url`);
+      return new Error(
+        `baseURL is undefined and ${url} is not an absolute url`
+      );
     } else if (!baseURL && this.isRelativeURL(url) === false) {
       baseURL = url;
     }
@@ -36,9 +38,9 @@ class Crawler {
       url.startsWith('https://') === false
     ) {
       url = `http://${url}`;
-    } 
+    }
 
-   try {
+    try {
       return new URL(url).href;
     } catch (error) {
       return error;
@@ -52,23 +54,25 @@ class Crawler {
   async webCrawler(seedURL, maxDepth) {
     const queue = new Queue();
     const visited = new Set();
-  
-    
+
     seedURL = this.parseURL(seedURL, seedURL);
     if (seedURL instanceof Error === false) {
       queue.enqueue([seedURL, 0]);
     }
-    
+
     while (queue.size() > 0) {
       let [url, depth] = queue.dequeue();
       if (url instanceof Error === false) {
         try {
           const response = await axios.get(url);
-  
+
           const $ = cheerio.load(response.data);
           const $a = $('body a');
 
-          await dbClient.insertOne('visited', { url, 'label': $('title').text() });
+          await dbClient.insertOne('visited', {
+            url,
+            label: $('title').text(),
+          });
           visited.add(url);
 
           if (depth <= maxDepth) {
@@ -86,7 +90,7 @@ class Crawler {
               }
             });
           }
-        } catch(error) {
+        } catch (error) {
           console.error(`Error: ${error.message}`);
         }
       }

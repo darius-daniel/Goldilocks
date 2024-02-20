@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 
+// function handleSubmit(event, urlRef) {}
+
 export default function SearchBar() {
   const urlRef = useRef(null);
 
@@ -8,7 +10,7 @@ export default function SearchBar() {
       className="form-row justify-content-center center-div mb-3 w-65"
       onSubmit={(event) => {
         event.preventDefault();
-        if (urlRef !== null) console.log(urlRef.current.value);
+        if (urlRef === null) urlRef = 'www.scraping-bot.io';
       }}
     >
       <div className="input-group mb-3">

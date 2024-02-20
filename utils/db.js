@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient } from 'mongodb';
 
 class DBClient {
   constructor() {
@@ -29,7 +29,9 @@ class DBClient {
   }
 
   async insertMany(collection, arrayOfItems) {
-    const insertInfo = await this.db.collection(collection).insertMany(arrayOfItems);
+    const insertInfo = await this.db
+      .collection(collection)
+      .insertMany(arrayOfItems);
 
     return insertInfo;
   }
