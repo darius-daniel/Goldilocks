@@ -1,20 +1,31 @@
+import { useRef } from 'react';
+
 export default function SearchBar() {
+  const urlRef = useRef(null);
+
   return (
-    <div className="form-row justify-content-center w-65 center-div">
+    <form
+      className="form-row justify-content-center center-div mb-3 w-65"
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (urlRef !== null) console.log(urlRef.current.value);
+      }}
+    >
       <div className="input-group mb-3">
         <input
           type="text"
           className="form-control"
-          placeholder="Enter webpage URL"
+          placeholder="Enter website"
+          ref={urlRef}
         />
         <button
-          className="btn p-3 btn-outline-secondary bg-primary border-primary text-white w-15"
-          type="button"
-          id="button-addon2"
+          className="btn btn-outline-secondary bg-primary border-primary text-white w-15 p-3"
+          type="submit"
+          id="btn-search"
         >
           Start
         </button>
       </div>
-    </div>
+    </form>
   );
 }
