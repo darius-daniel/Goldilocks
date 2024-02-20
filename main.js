@@ -1,4 +1,4 @@
-import Crawler from './crawler.js';
+import Crawler from './crawler';
 
 const rootURL = process.argv[2] || 'www.scraping-bot.io';
 

@@ -1,25 +1,8 @@
-# Goldilocks
-## Description
-Goldilocks is a terminal-based bot written in JavaScript to crawl webpages and parse their contents, and store relevant information to a MongoDB database.
-## Dependencies
-* `JavaScript`
-* `Node.js`
-* `Axios`
-* `Cheerio`
-* `MongoDB driver for Node.js`
-* `MongoDB server`
+# React + Vite
 
-## Usage
-* Clone repository
-     ```
-     $ git clone https://github.com/darius-daniel/Goldilocks.git
-     $ cd Goldilocks
-     ```
-* Install dependencies
-    ```
-    $ npm install
-    ```
-* Start the crawler
-    ```
-    $ npm run start-crawler
-    ```
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

@@ -1,4 +1,4 @@
-import dbClient from '../utils/db.js';
+import dbClient from '../utils/db';
 import { expect } from 'chai';
 import Sinon from 'sinon';
 
