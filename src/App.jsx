@@ -1,12 +1,13 @@
 import './App.css';
 import Heading from './components/Heading';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
-    <ul>
+    <>
       <Heading />
       <SearchBar />
-    </ul>
+    </>
   );
 }
 
