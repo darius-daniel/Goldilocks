@@ -1,7 +1,14 @@
 import './App.css';
+import Heading from './components/Heading';
+import SideBar from './components/SideBar';
 
 function App() {
-  return <h1> Goldilocks</h1>;
+  return (
+    <>
+      <Heading />
+      <SideBar />
+    </>
+  );
 }
 
 export default App;
