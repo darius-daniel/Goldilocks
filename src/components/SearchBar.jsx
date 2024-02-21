@@ -3,7 +3,7 @@ import { useRef } from 'react';
 // function handleSubmit(event, urlRef) {}
 
 export default function SearchBar() {
-  const urlRef = useRef(null);
+  let urlRef = useRef(null);
 
   return (
     <form

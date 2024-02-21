@@ -1,5 +1,6 @@
 import './App.css';
 import Heading from './components/Heading';
+import ResultTable from './components/ResultTable';
 import SearchBar from './components/SearchBar';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <>
       <Heading />
       <SearchBar />
+      <ResultTable results={[]} />
     </>
   );
 }
