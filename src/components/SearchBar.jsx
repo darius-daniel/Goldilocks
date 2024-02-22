@@ -1,17 +1,25 @@
+import axios from 'axios';
 import { useRef } from 'react';
-
-// function handleSubmit(event, urlRef) {}
 
 export default function SearchBar() {
   let urlRef = useRef(null);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!urlRef) urlRef.current.value = 'www.scraping-bot.io';
+
+    console.log(urlRef.current.value);
+
+    axios
+      .post('http://localhost:3000/', { url: urlRef.current.value })
+      .then(() => console.log('Sent'))
+      .catch((error) => console.error(`Error: ${error}`));
+  }
+
   return (
     <form
       className="form-row justify-content-center center-div mb-3 w-65"
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (urlRef === null) urlRef = 'www.scraping-bot.io';
-      }}
+      onSubmit={handleSubmit}
     >
       <div className="input-group mb-3">
         <input

@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
+import axios from 'axios';
 import dbClient from './db.js';
 import Queue from './queue.js';
-import axios from 'axios';
 
 class Crawler {
   isRelativeURL(url) {
