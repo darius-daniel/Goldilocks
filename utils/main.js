@@ -11,6 +11,15 @@ app.use(
 );
 app.use(express.json());
 
+app.post('/', (request, response) => {
+  response.send('Received!!');
+  // console.log(request.body);
+  const rootUrl = request.body.url;
+  console.log(rootUrl);
+  const bot1 = new Crawler();
+  bot1.webCrawler(rootUrl, 5);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
