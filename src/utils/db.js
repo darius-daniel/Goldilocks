@@ -42,6 +42,15 @@ class DBClient {
     }
     return false;
   }
+
+  async fetchAll() {
+    const records = await this.db
+      .collection('visited')
+      .find({})
+      .limit(15)
+      .toArray();
+    return records;
+  }
 }
 
 const dbClient = new DBClient();

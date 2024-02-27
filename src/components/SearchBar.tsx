@@ -1,19 +1,24 @@
-import axios from 'axios';
-import { useRef } from 'react';
+import axios from "axios";
+import React from "react";
+import { RefObject, useRef } from "react";
 
-export default function SearchBar() {
-  let urlRef = useRef(null);
+interface SearchBarProps {
+  setCrawling: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  function handleSubmit(event) {
+export default function SearchBar({ setCrawling }: SearchBarProps) {
+  let urlRef: RefObject<HTMLInputElement> = useRef(null);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!urlRef) urlRef.current.value = 'www.scraping-bot.io';
-
-    console.log(urlRef.current.value);
+    if (urlRef === null) urlRef.current.value = "www.scraping-bot.io";
 
     axios
-      .post('http://localhost:3000/', { url: urlRef.current.value })
-      .then(() => console.log('Sent'))
+      .post("http://localhost:3000/crawler", { url: urlRef.current.value })
+      .then(() => console.log("Sent"))
       .catch((error) => console.error(`Error: ${error}`));
+
+    setCrawling(true);
   }
 
   return (

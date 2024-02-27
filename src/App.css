@@ -1,16 +1,16 @@
 .w-15 {
-    width: 15%;
+  width: 15%;
 }
 
 .w-65 {
-    width: 65%;
+  width: 65%;
 }
 
 .center-div {
-    display: table;
-    margin: auto;
+  display: table;
+  margin: auto;
 }
 
 tr {
-    padding: 10px;
+  padding: 10px;
 }
