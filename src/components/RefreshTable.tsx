@@ -1,9 +1,12 @@
 export default function RefreshTable() {
+  function handleClick() {}
+
   return (
     <button
       type="submit"
       className="btn btn-outline-secondary bg-white border-white text-primary p-2"
       id="btn-refresh"
+      onClick={handleClick}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
