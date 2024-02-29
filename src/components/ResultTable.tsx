@@ -1,29 +1,45 @@
-interface ResultTableProps {
-  records: { label: string; url: string }[] | [];
-}
+import useFetch from '../hooks/useFetch';
 
-export default function ResultTable({ records }: ResultTableProps) {
+export default function ResultTable() {
+  const records: Array<{ label: string; url: string }> = useFetch(
+    'http://localhost:3000/records'
+  );
+
   return (
-    <>
-      <table className="table table-sm w-65 center-div" cellPadding="5px">
-        <thead className="text-primary">
+    <div className="table-responsive w-65 m-auto">
+      <table className="table table-hover">
+        <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">URL</th>
+            <th scope="col" className="text-primary">
+              #
+            </th>
+            <th scope="col" className="text-primary">
+              Title
+            </th>
+            <th scope="col" className="text-primary">
+              URL
+            </th>
           </tr>
         </thead>
         <tbody>
           {records.map((record, index) => {
             const serial_no = index + 1;
-            <tr key={serial_no}>
-              <td>{serial_no}</td>
-              <td>{record.label}</td>
-              <td>{record.url}</td>
-            </tr>;
+            const url = record.url;
+            const label = record.label;
+            return (
+              <tr key={serial_no}>
+                <td>{serial_no}</td>
+                <td>{label.slice(0, 30)}...</td>
+                <td>
+                  <a href={record.url} className="text-primary-emphasis">
+                    {url.slice(0, 30)}...
+                  </a>
+                </td>
+              </tr>
+            );
           })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
