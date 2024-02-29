@@ -13,7 +13,7 @@ export default function SearchBar() {
 
   return (
     <form
-      className="form-row justify-content-center mb-3 ms-auto me-auto w-65"
+      className="form-row justify-content-center mb-3 m-auto w-65"
       onSubmit={handleSubmit}
     >
       <div className="input-group mb-3">
