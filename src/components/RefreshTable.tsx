@@ -4,7 +4,7 @@ export default function RefreshTable() {
   return (
     <button
       type="submit"
-      className="btn text-primary p-2"
+      className="btn d-inline text-primary p-0"
       id="btn-refresh"
       onClick={handleClick}
     >

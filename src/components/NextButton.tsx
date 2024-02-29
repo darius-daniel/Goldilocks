@@ -1,6 +1,10 @@
 export default function Next() {
   return (
-    <button type="button" className="btn text-primary p-2" id="btn-next">
+    <button
+      type="button"
+      className="btn d-inline text-primary p-0"
+      id="btn-next"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

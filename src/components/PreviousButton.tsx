@@ -1,6 +1,10 @@
 export default function Previous() {
   return (
-    <button type="button" className="btn text-primary p-2" id="btn-prev">
+    <button
+      type="button"
+      className="btn d-inline text-primary p-0"
+      id="btn-prev"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

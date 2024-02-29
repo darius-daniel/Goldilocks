@@ -16,7 +16,7 @@ export default function SearchBar() {
       className="form-row justify-content-center mb-3 m-auto w-65"
       onSubmit={handleSubmit}
     >
-      <div className="input-group mb-3">
+      <div className="input-group mb-4">
         <input
           type="text"
           className="form-control"
@@ -24,7 +24,7 @@ export default function SearchBar() {
           ref={urlRef}
         />
         <button
-          className="btn btn-outline-secondary bg-primary border-primary text-white w-15 p-3"
+          className="btn bg-primary text-white w-15 p-3"
           type="submit"
           id="btn-search"
         >
