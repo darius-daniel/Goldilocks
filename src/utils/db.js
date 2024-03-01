@@ -44,12 +44,13 @@ class DBClient {
   }
 
   async fetchAll() {
-    const records = await this.db
-      .collection('visited')
-      .find({})
-      .limit(15)
-      .toArray();
+    const records = await this.db.collection('visited').find({}).toArray();
     return records;
+  }
+
+  async countAll() {
+    const recordCount = await this.db.collection('visited').countDocuments();
+    return recordCount;
   }
 }
 

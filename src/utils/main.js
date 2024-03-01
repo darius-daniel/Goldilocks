@@ -1,6 +1,6 @@
 import Crawler from './crawler.js';
 import express from 'express';
-import path from 'path';
+// import path from 'path';
 import dbClient from './db.js';
 import cors from 'cors';
 
@@ -22,6 +22,11 @@ app.post('/crawler', (request, response) => {
 app.get('/records', async (request, response) => {
   const records = await dbClient.fetchAll();
   response.send(records).status(200);
+});
+
+app.get('/count', async (request, response) => {
+  const countAll = await dbClient.countAll();
+  response.send(countAll);
 });
 
 app.listen(port, () => {

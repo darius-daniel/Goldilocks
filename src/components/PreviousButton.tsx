@@ -1,9 +1,27 @@
-export default function Previous() {
+import { ToolBarProps } from './ToolBar';
+
+export default function Previous({
+  allRows,
+  setDisplayedRows,
+  pageObj,
+}: ToolBarProps) {
+  const page = pageObj.page;
+  const setPage = pageObj.setPage;
+
+  const handleClick = () => {
+    setPage(page > 1 ? page - 1 : 0);
+
+    const start = page > 1 ? (page - 1) * 15 : 0;
+    const end = page * 15;
+    setDisplayedRows(allRows.slice(start, end));
+  };
+
   return (
     <button
       type="button"
       className="btn d-inline text-primary p-0"
       id="btn-prev"
+      onClick={handleClick}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
