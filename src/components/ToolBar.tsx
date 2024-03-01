@@ -13,6 +13,7 @@ export interface ToolBarProps {
   pageObj: {
     page: number;
     setPage: React.Dispatch<React.SetStateAction<number>>;
+    pageMax: number;
   };
 }
 

@@ -7,10 +7,11 @@ export default function Next({
 }: ToolBarProps) {
   const page = pageObj.page;
   const setPage = pageObj.setPage;
+  const pageMax = pageObj.pageMax;
 
   const handleClick = () => {
-    const start = page > 1 ? (page - 1) * 15 : 0;
-    const end = page * 15;
+    const start = page > 1 ? (page - 1) * pageMax : 0;
+    const end = page * pageMax;
     setDisplayedRows(allRows.slice(start, end));
 
     setPage(page + 1);
@@ -21,6 +22,7 @@ export default function Next({
       className="btn d-inline text-primary p-0"
       id="btn-next"
       onClick={handleClick}
+      disabled={page > allRows.length / pageMax}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

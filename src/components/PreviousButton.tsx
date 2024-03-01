@@ -22,6 +22,7 @@ export default function Previous({
       className="btn d-inline text-primary p-0"
       id="btn-prev"
       onClick={handleClick}
+      disabled={page === 1}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

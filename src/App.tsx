@@ -17,7 +17,8 @@ function App() {
   const pageObj: {
     page: number;
     setPage: React.Dispatch<React.SetStateAction<number>>;
-  } = { page: currentPage, setPage: setCurrentPage };
+    pageMax: number;
+  } = { page: currentPage, setPage: setCurrentPage, pageMax: 15 };
 
   return (
     <>
