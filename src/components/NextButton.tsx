@@ -1,13 +1,14 @@
 import { ToolBarProps } from './ToolBar';
 
 export default function Next({
-  allRows,
+  rowObj,
   setDisplayedRows,
   pageObj,
 }: ToolBarProps) {
   const page = pageObj.page;
   const setPage = pageObj.setPage;
   const pageMax = pageObj.pageMax;
+  const allRows = rowObj.allRows;
 
   const handleClick = () => {
     const start = page > 1 ? (page - 1) * pageMax : 0;
@@ -19,7 +20,7 @@ export default function Next({
   return (
     <button
       type="button"
-      className="btn d-inline text-primary p-0"
+      className="btn d-inline text-primary p-0 ms-2"
       id="btn-next"
       onClick={handleClick}
       disabled={page > allRows.length / pageMax}

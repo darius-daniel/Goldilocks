@@ -1,10 +1,23 @@
-export default function RefreshTable() {
-  function handleClick() {}
+import axios from 'axios';
+import { ToolBarProps } from './ToolBar';
+
+export default function Refresher({
+  rowObj,
+  pageObj,
+  setDisplayedRows,
+}: ToolBarProps) {
+  const handleClick = async () => {
+    const records: Array<{ label: string; url: string }> = (
+      await axios.get('http://localhost:3000/records')
+    ).data;
+    rowObj.setAllRows(records);
+    setDisplayedRows(records.slice(0, pageObj.pageMax));
+  };
 
   return (
     <button
       type="submit"
-      className="btn d-inline text-primary p-0"
+      className="btn d-inline text-primary p-0 ms-2 me-2"
       id="btn-refresh"
       onClick={handleClick}
     >

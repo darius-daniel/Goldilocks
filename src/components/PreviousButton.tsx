@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { ToolBarProps } from './ToolBar';
 
 export default function Previous({
-  allRows,
+  rowObj,
   setDisplayedRows,
   pageObj,
 }: ToolBarProps) {
@@ -13,13 +14,13 @@ export default function Previous({
 
     const start = page > 1 ? (page - 1) * 15 : 0;
     const end = page * 15;
-    setDisplayedRows(allRows.slice(start, end));
+    setDisplayedRows(rowObj.allRows.slice(start, end));
   };
 
   return (
     <button
       type="button"
-      className="btn d-inline text-primary p-0"
+      className="btn d-inline text-primary p-0 me-2 ms-2"
       id="btn-prev"
       onClick={handleClick}
       disabled={page === 1}

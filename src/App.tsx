@@ -8,17 +8,27 @@ import { useState } from 'react';
 import useFetch from './hooks/useFetch';
 
 function App() {
-  const allRows: Array<{ label: string; url: string }> = useFetch(
+  const records: Array<{ label: string; url: string }> = useFetch(
     'http://localhost:3000/records'
   );
-  const [displayedRows, setDisplayedRows] = useState(allRows.slice(0, 15));
-  const [currentPage, setCurrentPage] = useState(1);
 
+  const [allRows, setAllRows] = useState(records);
+  const rowObj: {
+    allRows: Array<{ label: string; url: string }>;
+    setAllRows: React.Dispatch<
+      React.SetStateAction<Array<{ label: string; url: string }>>
+    >;
+  } = { allRows, setAllRows };
+
+  const [currentPage, setCurrentPage] = useState(1);
   const pageObj: {
     page: number;
     setPage: React.Dispatch<React.SetStateAction<number>>;
     pageMax: number;
-  } = { page: currentPage, setPage: setCurrentPage, pageMax: 15 };
+  } = { page: currentPage, setPage: setCurrentPage, pageMax: 10 };
+
+  const resultsFirstPage = allRows.slice(0, pageObj.pageMax);
+  const [displayedRows, setDisplayedRows] = useState(resultsFirstPage);
 
   return (
     <>
@@ -27,7 +37,7 @@ function App() {
       <ToolBar
         setDisplayedRows={setDisplayedRows}
         pageObj={pageObj}
-        allRows={allRows}
+        rowObj={rowObj}
       />
       <ResultTable displayedRows={displayedRows} />
     </>

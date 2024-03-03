@@ -1,10 +1,15 @@
-import RefreshTable from './RefreshTable';
+import Refresher from './Refresher';
 import Next from './NextButton';
 import Previous from './PreviousButton';
 import ResultRange from './ResultRange';
 
 export interface ToolBarProps {
-  allRows: Array<{ url: string; label: string }> | [];
+  rowObj: {
+    allRows: Array<{ label: string; url: string }>;
+    setAllRows: React.Dispatch<
+      React.SetStateAction<Array<{ label: string; url: string }>>
+    >;
+  };
 
   setDisplayedRows: React.Dispatch<
     React.SetStateAction<Array<{ label: string; url: string }>>
@@ -18,29 +23,29 @@ export interface ToolBarProps {
 }
 
 export default function ToolBar({
-  allRows,
+  rowObj,
   setDisplayedRows,
   pageObj,
 }: ToolBarProps) {
   return (
     <div className="w-65 m-auto d-flex justify-content-end">
-      <ResultRange
-        numOfRows={allRows.length}
+      <ResultRange numOfRows={rowObj.allRows.length} pageObj={pageObj} />
+      <Refresher
+        rowObj={rowObj}
         pageObj={pageObj}
-        maxPerPage={15}
+        setDisplayedRows={setDisplayedRows}
       />
-      <RefreshTable />
 
       <Previous
         setDisplayedRows={setDisplayedRows}
         pageObj={pageObj}
-        allRows={allRows}
+        rowObj={rowObj}
       />
 
       <Next
         setDisplayedRows={setDisplayedRows}
         pageObj={pageObj}
-        allRows={allRows}
+        rowObj={rowObj}
       />
     </div>
   );

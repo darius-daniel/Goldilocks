@@ -4,7 +4,7 @@ interface TableProps {
 
 export default function ResultTable({ displayedRows }: TableProps) {
   return (
-    <div className="table-responsive w-65 m-auto">
+    <div className="table-responsive w-75 w-65 m-auto">
       <table className="table table-hover">
         <thead>
           <tr>
