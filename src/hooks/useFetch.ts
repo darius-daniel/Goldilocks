@@ -8,7 +8,7 @@ export default function useFetch(url: string): any {
     axios.get(url).then((response: AxiosResponse) => {
       setData(response.data);
     }).catch((error: Error) => {
-      console.log(`Error: ${error.message}`);
+      console.error(`Error: ${error.message}`);
     })
   }, []);
 

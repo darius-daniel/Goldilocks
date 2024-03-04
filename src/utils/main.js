@@ -19,8 +19,7 @@ app.post('/crawler', (request, response) => {
   bot.webCrawler(rootUrl, 5);
 
   app.post('/stop', (request, response) => {
-    const stopSignal = request.body.stop;
-    bot.stopSignal = stopSignal;
+    bot.stopSignal = request.body.stop;
   });
 });
 

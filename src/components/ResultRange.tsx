@@ -8,8 +8,6 @@ interface RangeProps {
 }
 
 export default function ResultRange({ numOfRows, pageObj }: RangeProps) {
-  console.log(numOfRows);
-
   let pageEnd: number;
   let pageStart: number;
   let info: string;
@@ -17,8 +15,13 @@ export default function ResultRange({ numOfRows, pageObj }: RangeProps) {
 
   if (numOfRows === 0) info = '0 results';
   else {
-    pageEnd = pageObj.page * pageMax;
-    pageStart = pageEnd - pageMax + 1;
+    if (numOfRows <= pageObj.pageMax) {
+      pageEnd = numOfRows;
+      pageStart = 1;
+    } else {
+      pageEnd = pageObj.page * pageMax;
+      pageStart = pageEnd - pageMax + 1;
+    }
     info = `${pageStart} - ${pageEnd} of ${numOfRows}`;
   }
 
