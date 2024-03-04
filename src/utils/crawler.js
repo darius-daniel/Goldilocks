@@ -4,6 +4,10 @@ import dbClient from './db.js';
 import Queue from './queue.js';
 
 class Crawler {
+  constructor() {
+    this.stopSignal = false;
+  }
+
   isRelativeURL(url) {
     return url.startsWith('/') || url.startsWith('#');
   }
@@ -60,7 +64,7 @@ class Crawler {
       queue.enqueue([seedURL, 0]);
     }
 
-    while (queue.size() > 0) {
+    while (queue.size() > 0 && this.stopSignal === false) {
       let [url, depth] = queue.dequeue();
       if (url instanceof Error === false) {
         try {
@@ -95,6 +99,7 @@ class Crawler {
         }
       }
     }
+    console.log('Stopped crawling');
   }
 }
 

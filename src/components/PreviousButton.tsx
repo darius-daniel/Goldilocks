@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ToolBarProps } from './ToolBar';
 
 export default function Previous({

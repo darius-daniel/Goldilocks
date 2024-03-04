@@ -15,8 +15,13 @@ app.use(cors());
 
 app.post('/crawler', (request, response) => {
   const rootUrl = request.body.url;
-  const bot1 = new Crawler();
-  bot1.webCrawler(rootUrl, 5);
+  const bot = new Crawler();
+  bot.webCrawler(rootUrl, 5);
+
+  app.post('/stop', (request, response) => {
+    const stopSignal = request.body.stop;
+    bot.stopSignal = stopSignal;
+  });
 });
 
 app.get('/records', async (request, response) => {

@@ -5,7 +5,7 @@ interface TableProps {
 export default function ResultTable({ displayedRows }: TableProps) {
   return (
     <div className="table-responsive w-75 w-65 m-auto">
-      <table className="table table-hover">
+      <table className="table table-hover table-sm">
         <thead>
           <tr>
             <th scope="col" className="text-primary">
@@ -27,10 +27,10 @@ export default function ResultTable({ displayedRows }: TableProps) {
             return (
               <tr key={serial_no}>
                 <td>{serial_no}</td>
-                <td>{label.slice(0, 30)}...</td>
+                <td>{label.slice(0, 40)}...</td>
                 <td>
                   <a href={row.url} className="text-primary-emphasis">
-                    {url.slice(0, 30)}...
+                    {url.slice(0, 40)}...
                   </a>
                 </td>
               </tr>
