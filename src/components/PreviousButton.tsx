@@ -1,19 +1,23 @@
 import { ToolBarProps } from './ToolBar';
 
 export default function Previous({
-  rowObj,
+  rowInfo,
   setDisplayedRows,
-  pageObj,
+  pageInfo,
 }: ToolBarProps) {
-  const page = pageObj.page;
-  const setPage = pageObj.setPage;
+  const { pageNum, setPageNum, pageMax } = pageInfo;
+  const { allRows } = rowInfo;
 
   const handleClick = () => {
-    setPage(page > 1 ? page - 1 : 0);
+    setPageNum(pageNum > 1 ? pageNum - 1 : 1);
 
-    const start = page > 1 ? (page - 1) * 15 : 0;
-    const end = page * 15;
-    setDisplayedRows(rowObj.allRows.slice(start, end));
+    let start: number; /*= pageNum > 1 ? (pageNum - 1) * pageMax : 0;*/
+    let end: number = pageNum * pageMax;
+
+    if (pageNum === 1) start = 0;
+    else start = end - pageMax;
+
+    setDisplayedRows(allRows.slice(start, end));
   };
 
   return (
@@ -22,7 +26,7 @@ export default function Previous({
       className="btn d-inline text-primary p-0 me-2 ms-2"
       id="btn-prev"
       onClick={handleClick}
-      disabled={page === 1}
+      disabled={pageNum === 1}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
