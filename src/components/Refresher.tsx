@@ -8,12 +8,15 @@ export default function Refresher({
 }: ToolBarProps) {
   function handleClick() {
     const { allRows, setAllRows } = rowInfo;
-    const { pageMax } = pageInfo;
+    const { pageMax, setPageNum } = pageInfo;
     axios
       .get('http://localhost:3000/records')
-      .then((response) => setAllRows(response.data))
+      .then((response) => {
+        setAllRows(response.data);
+        setDisplayedRows(allRows.slice(0, pageMax));
+        setPageNum(1);
+      })
       .catch((error: Error) => console.error(`Error: ${error.message}`));
-    setDisplayedRows(allRows.slice(0, pageMax));
   }
 
   return (

@@ -9,15 +9,10 @@ export default function Previous({
   const { allRows } = rowInfo;
 
   const handleClick = () => {
-    setPageNum(pageNum > 1 ? pageNum - 1 : 1);
-
-    let start: number; /*= pageNum > 1 ? (pageNum - 1) * pageMax : 0;*/
-    let end: number = pageNum * pageMax;
-
-    if (pageNum === 1) start = 0;
-    else start = end - pageMax;
-
+    const start: number = pageNum * pageMax;
+    const end: number = start + pageMax;
     setDisplayedRows(allRows.slice(start, end));
+    setPageNum(pageNum - 1);
   };
 
   return (
