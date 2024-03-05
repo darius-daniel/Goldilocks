@@ -29,7 +29,7 @@ export default function ToolBar({
 }: ToolBarProps) {
   return (
     <div className="w-65 m-auto d-flex justify-content-end">
-      <ResultRange numOfRows={rowInfo.allRows.length} pageInfo={pageInfo} />
+      <ResultRange rowInfo={rowInfo} pageInfo={pageInfo} />
       <Refresher
         rowInfo={rowInfo}
         pageInfo={pageInfo}

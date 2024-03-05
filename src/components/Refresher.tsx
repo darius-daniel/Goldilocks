@@ -15,6 +15,7 @@ export default function Refresher({
         setAllRows(response.data);
         setDisplayedRows(allRows.slice(0, pageMax));
         setPageNum(1);
+        console.log(allRows.length);
       })
       .catch((error: Error) => console.error(`Error: ${error.message}`));
   }
