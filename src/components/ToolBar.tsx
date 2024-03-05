@@ -4,48 +4,48 @@ import Previous from './PreviousButton';
 import ResultRange from './ResultRange';
 
 export interface ToolBarProps {
-  rowObj: {
+  rowInfo: {
     allRows: Array<{ label: string; url: string }>;
     setAllRows: React.Dispatch<
       React.SetStateAction<Array<{ label: string; url: string }>>
     >;
   };
 
+  pageInfo: {
+    pageNum: number;
+    setPageNum: React.Dispatch<React.SetStateAction<number>>;
+    pageMax: number;
+  };
+
   setDisplayedRows: React.Dispatch<
     React.SetStateAction<Array<{ label: string; url: string }>>
   >;
-
-  pageObj: {
-    page: number;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
-    pageMax: number;
-  };
 }
 
 export default function ToolBar({
-  rowObj,
+  rowInfo,
+  pageInfo,
   setDisplayedRows,
-  pageObj,
 }: ToolBarProps) {
   return (
     <div className="w-65 m-auto d-flex justify-content-end">
-      <ResultRange numOfRows={rowObj.allRows.length} pageObj={pageObj} />
+      <ResultRange numOfRows={rowInfo.allRows.length} pageInfo={pageInfo} />
       <Refresher
-        rowObj={rowObj}
-        pageObj={pageObj}
+        rowInfo={rowInfo}
+        pageInfo={pageInfo}
         setDisplayedRows={setDisplayedRows}
       />
 
       <Previous
         setDisplayedRows={setDisplayedRows}
-        pageObj={pageObj}
-        rowObj={rowObj}
+        pageInfo={pageInfo}
+        rowInfo={rowInfo}
       />
 
       <Next
         setDisplayedRows={setDisplayedRows}
-        pageObj={pageObj}
-        rowObj={rowObj}
+        pageInfo={pageInfo}
+        rowInfo={rowInfo}
       />
     </div>
   );

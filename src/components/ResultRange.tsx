@@ -1,25 +1,25 @@
 interface RangeProps {
   numOfRows: number;
-  pageObj: {
-    page: number;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+  pageInfo: {
+    pageNum: number;
+    setPageNum: React.Dispatch<React.SetStateAction<number>>;
     pageMax: number;
   };
 }
 
-export default function ResultRange({ numOfRows, pageObj }: RangeProps) {
+export default function ResultRange({ numOfRows, pageInfo }: RangeProps) {
   let pageEnd: number;
   let pageStart: number;
   let info: string;
-  const pageMax: number = pageObj.pageMax;
+  const pageMax: number = pageInfo.pageMax;
 
   if (numOfRows === 0) info = '0 results';
   else {
-    if (numOfRows <= pageObj.pageMax) {
+    if (numOfRows <= pageInfo.pageMax) {
       pageEnd = numOfRows;
       pageStart = 1;
     } else {
-      pageEnd = pageObj.page * pageMax;
+      pageEnd = pageInfo.pageNum * pageMax;
       pageStart = pageEnd - pageMax + 1;
     }
     info = `${pageStart} - ${pageEnd} of ${numOfRows}`;

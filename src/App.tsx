@@ -13,7 +13,7 @@ function App() {
   );
 
   const [allRows, setAllRows] = useState(records);
-  const rowObj: {
+  const rowInfo: {
     allRows: Array<{ label: string; url: string }>;
     setAllRows: React.Dispatch<
       React.SetStateAction<Array<{ label: string; url: string }>>
@@ -21,13 +21,13 @@ function App() {
   } = { allRows, setAllRows };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const pageObj: {
-    page: number;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+  const pageInfo: {
+    pageNum: number;
+    setPageNum: React.Dispatch<React.SetStateAction<number>>;
     pageMax: number;
-  } = { page: currentPage, setPage: setCurrentPage, pageMax: 10 };
+  } = { pageNum: currentPage, setPageNum: setCurrentPage, pageMax: 10 };
 
-  const resultsFirstPage = allRows.slice(0, pageObj.pageMax);
+  const resultsFirstPage = allRows.slice(0, pageInfo.pageMax);
   const [displayedRows, setDisplayedRows] = useState(resultsFirstPage);
 
   return (
@@ -36,8 +36,8 @@ function App() {
       <SearchBar />
       <ToolBar
         setDisplayedRows={setDisplayedRows}
-        pageObj={pageObj}
-        rowObj={rowObj}
+        pageInfo={pageInfo}
+        rowInfo={rowInfo}
       />
       <ResultTable displayedRows={displayedRows} />
     </>

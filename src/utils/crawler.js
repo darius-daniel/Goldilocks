@@ -5,7 +5,7 @@ import Queue from './queue.js';
 
 class Crawler {
   constructor() {
-    this.stopSignal = false;
+    this.isRunning = true;
   }
 
   isRelativeURL(url) {
@@ -64,7 +64,7 @@ class Crawler {
       queue.enqueue([seedURL, 0]);
     }
 
-    while (queue.size() > 0 && this.stopSignal === false) {
+    while (queue.size() > 0 && this.isRunning === true) {
       let [url, depth] = queue.dequeue();
       if (url instanceof Error === false) {
         try {

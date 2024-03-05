@@ -1,18 +1,20 @@
-import axios from 'axios';
 import { ToolBarProps } from './ToolBar';
+import axios from 'axios';
 
 export default function Refresher({
-  rowObj,
-  pageObj,
+  rowInfo,
+  pageInfo,
   setDisplayedRows,
 }: ToolBarProps) {
-  const handleClick = async () => {
-    const records: Array<{ label: string; url: string }> = (
-      await axios.get('http://localhost:3000/records')
-    ).data;
-    rowObj.setAllRows(records);
-    setDisplayedRows(records.slice(0, pageObj.pageMax));
-  };
+  function handleClick() {
+    const { allRows, setAllRows } = rowInfo;
+    const { pageMax } = pageInfo;
+    axios
+      .get('http://localhost:3000/records')
+      .then((response) => setAllRows(response.data))
+      .catch((error: Error) => console.error(`Error: ${error.message}`));
+    setDisplayedRows(allRows.slice(0, pageMax));
+  }
 
   return (
     <button

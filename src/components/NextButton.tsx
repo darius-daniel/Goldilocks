@@ -1,29 +1,29 @@
 import { ToolBarProps } from './ToolBar';
 
 export default function Next({
-  rowObj,
+  rowInfo,
   setDisplayedRows,
-  pageObj,
+  pageInfo,
 }: ToolBarProps) {
-  const page = pageObj.page;
-  const setPage = pageObj.setPage;
-  const pageMax = pageObj.pageMax;
-  const allRows = rowObj.allRows;
+  const { pageNum, setPageNum, pageMax } = pageInfo;
+  const { allRows } = rowInfo;
+  const lastPage: number = Math.ceil(allRows.length / pageMax);
 
   const handleClick = () => {
-    const start = page > 1 ? (page - 1) * pageMax : 0;
-    const end = page * pageMax;
-    setDisplayedRows(allRows.slice(start, end));
+    setPageNum(pageNum + 1);
 
-    setPage(page + 1);
+    let end: number = pageNum * pageMax;
+    let start: number = end - pageMax;
+    setDisplayedRows(allRows.slice(start, end));
   };
+
   return (
     <button
       type="button"
       className="btn d-inline text-primary p-0 ms-2"
       id="btn-next"
       onClick={handleClick}
-      disabled={page > allRows.length / pageMax}
+      disabled={pageNum === lastPage + 1}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

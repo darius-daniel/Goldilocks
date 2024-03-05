@@ -22,8 +22,8 @@ export default function ResultTable({ displayedRows }: TableProps) {
         <tbody>
           {displayedRows.map((row, index) => {
             const serial_no = index + 1;
-            const url = row.url;
-            const label = row.label;
+            const { url, label } = row;
+
             return (
               <tr key={serial_no}>
                 <td>{serial_no}</td>

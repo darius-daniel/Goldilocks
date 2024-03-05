@@ -13,14 +13,18 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-app.post('/crawler', (request, response) => {
-  const rootUrl = request.body.url;
-  const bot = new Crawler();
-  bot.webCrawler(rootUrl, 5);
+let bot = new Crawler();
 
-  app.post('/stop', (request, response) => {
-    bot.stopSignal = request.body.stop;
-  });
+app.post('/crawler', (request, response) => {
+  bot.webCrawler(request.body.url, 5);
+});
+
+app.post('/stop', (request, response) => {
+  bot.isRunning = request.body.isRunning;
+});
+
+app.get('/status', (request, response) => {
+  response.status(200).send(bot.isRunning);
 });
 
 app.get('/records', async (request, response) => {
@@ -30,7 +34,7 @@ app.get('/records', async (request, response) => {
 
 app.get('/count', async (request, response) => {
   const countAll = await dbClient.countAll();
-  response.send(countAll);
+  response.send(countAll).status(200);
 });
 
 app.listen(port, () => {
