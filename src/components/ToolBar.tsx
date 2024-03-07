@@ -16,37 +16,15 @@ export interface ToolBarProps {
     setPageNum: React.Dispatch<React.SetStateAction<number>>;
     pageMax: number;
   };
-
-  setDisplayedRows: React.Dispatch<
-    React.SetStateAction<Array<{ label: string; url: string }>>
-  >;
 }
 
-export default function ToolBar({
-  rowInfo,
-  pageInfo,
-  setDisplayedRows,
-}: ToolBarProps) {
+export default function ToolBar({ rowInfo, pageInfo }: ToolBarProps) {
   return (
     <div className="w-65 m-auto d-flex justify-content-end">
       <ResultRange rowInfo={rowInfo} pageInfo={pageInfo} />
-      <Refresher
-        rowInfo={rowInfo}
-        pageInfo={pageInfo}
-        setDisplayedRows={setDisplayedRows}
-      />
-
-      <Previous
-        setDisplayedRows={setDisplayedRows}
-        pageInfo={pageInfo}
-        rowInfo={rowInfo}
-      />
-
-      <Next
-        setDisplayedRows={setDisplayedRows}
-        pageInfo={pageInfo}
-        rowInfo={rowInfo}
-      />
+      <Refresher rowInfo={rowInfo} pageInfo={pageInfo} />
+      <Previous pageInfo={pageInfo} rowInfo={rowInfo} />
+      <Next pageInfo={pageInfo} rowInfo={rowInfo} />
     </div>
   );
 }

@@ -1,18 +1,10 @@
 import { ToolBarProps } from './ToolBar';
 
-export default function Previous({
-  rowInfo,
-  setDisplayedRows,
-  pageInfo,
-}: ToolBarProps) {
-  const { pageNum, setPageNum, pageMax } = pageInfo;
-  const { allRows } = rowInfo;
+export default function Previous({ pageInfo }: ToolBarProps) {
+  const { pageNum, setPageNum } = pageInfo;
 
   const handleClick = () => {
-    const start: number = pageNum * pageMax;
-    const end: number = start + pageMax;
-    setDisplayedRows(allRows.slice(start, end));
-    setPageNum(pageNum - 1);
+    setPageNum((prev) => (prev > 1 ? prev - 1 : prev));
   };
 
   return (
