@@ -1,4 +1,5 @@
 import { ToolBarProps } from './ToolBar';
+import { GrFormPreviousLink } from 'react-icons/gr';
 
 export default function Previous({ pageInfo }: ToolBarProps) {
   const { pageNum, setPageNum } = pageInfo;
@@ -10,21 +11,12 @@ export default function Previous({ pageInfo }: ToolBarProps) {
   return (
     <button
       type="button"
-      className="btn d-inline text-primary p-0 me-2 ms-2"
+      className="btn d-inline text-primary p-0"
       id="btn-prev"
       onClick={handleClick}
       disabled={pageNum === 1}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="currentColor"
-        className="bi bi-caret-left"
-        viewBox="0 0 16 16"
-      >
-        <path d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753" />
-      </svg>
+      <GrFormPreviousLink size="30px" />
     </button>
   );
 }
