@@ -17,6 +17,7 @@ let bot = new Crawler();
 
 app.post('/crawler', (request, response) => {
   bot.webCrawler(request.body.url, 5);
+  bot.isRunning = true;
 });
 
 app.post('/stop', (request, response) => {

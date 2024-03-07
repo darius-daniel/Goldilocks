@@ -5,7 +5,7 @@ import Queue from './queue.js';
 
 class Crawler {
   constructor() {
-    this.isRunning = true;
+    this.isRunning = false;
   }
 
   isRelativeURL(url) {

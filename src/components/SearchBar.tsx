@@ -5,6 +5,7 @@ import useFetch from '../hooks/useFetch';
 export default function SearchBar() {
   let urlRef: RefObject<HTMLInputElement> = useRef(null);
   const initialState = useFetch('http://localhost:3000/status');
+  console.log(initialState);
   const [running, setRunning] = useState(initialState);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -19,7 +20,7 @@ export default function SearchBar() {
 
   function handleStop() {
     setRunning(false);
-    usePost('http://localhost:3000/stop', { isRunning: running });
+    usePost('http://localhost:3000/stop', { isRunning: false });
   }
 
   return (
