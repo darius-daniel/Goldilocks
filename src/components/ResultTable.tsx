@@ -1,22 +1,8 @@
 import { useEffect, useState } from 'react';
 import { DBRows } from '../App';
+import { ToolBarProps } from './ToolBar';
 
-interface TableProps {
-  rowInfo: {
-    allRows: Array<{ label: string; url: string }>;
-    setAllRows: React.Dispatch<
-      React.SetStateAction<Array<{ label: string; url: string }>>
-    >;
-  };
-
-  pageInfo: {
-    pageNum: number;
-    setPageNum: React.Dispatch<React.SetStateAction<number>>;
-    pageMax: number;
-  };
-}
-
-export default function ResultTable({ pageInfo, rowInfo }: TableProps) {
+export default function ResultTable({ pageInfo, rowInfo }: ToolBarProps) {
   const { pageMax, pageNum } = pageInfo;
   const { allRows } = rowInfo;
   const [displayedRows, setDisplayedRows] = useState<DBRows>(

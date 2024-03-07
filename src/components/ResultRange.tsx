@@ -1,19 +1,6 @@
-interface RangeProps {
-  rowInfo: {
-    allRows: Array<{ label: string; url: string }>;
-    setAllRows: React.Dispatch<
-      React.SetStateAction<Array<{ label: string; url: string }>>
-    >;
-  };
+import { ToolBarProps } from './ToolBar';
 
-  pageInfo: {
-    pageNum: number;
-    setPageNum: React.Dispatch<React.SetStateAction<number>>;
-    pageMax: number;
-  };
-}
-
-export default function ResultRange({ rowInfo, pageInfo }: RangeProps) {
+export default function ResultRange({ rowInfo, pageInfo }: ToolBarProps) {
   let info: string;
   const { pageMax, pageNum } = pageInfo;
   const { allRows } = rowInfo;
@@ -24,8 +11,8 @@ export default function ResultRange({ rowInfo, pageInfo }: RangeProps) {
   const pageStart: number = (pageNum - 1) * pageMax;
   let pageEnd: number;
 
-  if (pageNum === lastPage && numOfRows % (pageNum * pageMax) === 0)
-    pageEnd = pageStart + (numOfRows % (pageNum * pageMax));
+  if (pageNum === lastPage && numOfRows % pageMax !== 0)
+    pageEnd = pageStart + (numOfRows % pageMax);
   else pageEnd = pageStart + pageMax;
 
   if (numOfRows === 0) info = '0 results';

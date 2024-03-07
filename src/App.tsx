@@ -8,6 +8,17 @@ import { useState } from 'react';
 import useFetch from './hooks/useFetch';
 
 export type DBRows = Array<{ label: string; url: string }> | [];
+export type PageInfo = {
+  pageNum: number;
+  pageMax: number;
+  setPageNum: React.Dispatch<React.SetStateAction<number>>;
+};
+export type RowInfo = {
+  allRows: Array<{ label: string; url: string }>;
+  setAllRows: React.Dispatch<
+    React.SetStateAction<Array<{ label: string; url: string }>>
+  >;
+};
 
 function App() {
   const records: Array<{ label: string; url: string }> = useFetch(
@@ -15,19 +26,14 @@ function App() {
   );
 
   const [allRows, setAllRows] = useState<DBRows>(records);
-  const rowInfo: {
-    allRows: Array<{ label: string; url: string }>;
-    setAllRows: React.Dispatch<
-      React.SetStateAction<Array<{ label: string; url: string }>>
-    >;
-  } = { allRows, setAllRows };
-
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageInfo: {
-    pageNum: number;
-    setPageNum: React.Dispatch<React.SetStateAction<number>>;
-    pageMax: number;
-  } = { pageNum: currentPage, setPageNum: setCurrentPage, pageMax: 10 };
+
+  const rowInfo: RowInfo = { allRows, setAllRows };
+  const pageInfo: PageInfo = {
+    pageNum: currentPage,
+    pageMax: 10,
+    setPageNum: setCurrentPage,
+  };
 
   return (
     <>
