@@ -1,3 +1,7 @@
+import {
+  TbPlayerTrackNextFilled,
+  TbPlayerTrackPrevFilled,
+} from 'react-icons/tb';
 import { ToolBarProps } from './ToolBar';
 
 export default function PageButtons({ pageInfo, rowInfo }: ToolBarProps) {
@@ -17,12 +21,21 @@ export default function PageButtons({ pageInfo, rowInfo }: ToolBarProps) {
     end = pageNum + 1;
   }
 
+  if (start === lastPage) end = start;
+
   const pageArray: Array<number> = [];
-  for (let page = start; page <= end; page++) pageArray.push(page);
+  for (let page: number = start; page <= end; page++) pageArray.push(page);
 
   return (
     <nav aria-label="Page Navigation" className="w-50 m-auto">
       <ul className="pagination pagination-lg justify-content-end">
+        <button
+          className="btn btn-white text-primary me-3 pb-2"
+          onClick={() => setPageNum((prev) => prev - 10)}
+          disabled={pageNum - 10 < 0}
+        >
+          <TbPlayerTrackPrevFilled />
+        </button>
         {pageArray.map((page) => {
           return (
             <button
@@ -34,6 +47,13 @@ export default function PageButtons({ pageInfo, rowInfo }: ToolBarProps) {
             </button>
           );
         })}
+        <button
+          className="btn btn-white text-primary ms-3 pb-2"
+          onClick={() => setPageNum((prev) => prev + 10)}
+          disabled={pageNum + 10 > lastPage}
+        >
+          <TbPlayerTrackNextFilled />
+        </button>
       </ul>
     </nav>
   );
