@@ -2,6 +2,7 @@ import Heading from './components/Heading';
 import SearchBar from './components/SearchBar';
 import ResultTable from './components/ResultTable';
 import ToolBar from './components/ToolBar';
+import PageButtons from './components/PageButtons';
 
 import './App.css';
 import { useState } from 'react';
@@ -41,6 +42,7 @@ function App() {
       <SearchBar />
       <ToolBar pageInfo={pageInfo} rowInfo={rowInfo} />
       <ResultTable rowInfo={rowInfo} pageInfo={pageInfo} />
+      <PageButtons pageInfo={pageInfo} rowInfo={rowInfo} />
     </>
   );
 }
