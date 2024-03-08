@@ -8,6 +8,13 @@ class Crawler {
     this.isRunning = false;
   }
 
+  setIsRunning(state) {
+    this.isRunning = state;
+  }
+  getIsRunning() {
+    return this.isRunning;
+  }
+
   isRelativeURL(url) {
     return url.startsWith('/') || url.startsWith('#');
   }

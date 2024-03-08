@@ -16,16 +16,16 @@ app.use(cors());
 let bot = new Crawler();
 
 app.post('/crawler', (request, response) => {
+  bot.setIsRunning(true);
   bot.webCrawler(request.body.url, 5);
-  bot.isRunning = true;
 });
 
 app.post('/stop', (request, response) => {
-  bot.isRunning = request.body.isRunning;
+  bot.setIsRunning(request.body.isRunning);
 });
 
 app.get('/status', (request, response) => {
-  response.status(200).send(bot.isRunning);
+  response.status(200).send(bot.getIsRunning());
 });
 
 app.get('/records', async (request, response) => {
